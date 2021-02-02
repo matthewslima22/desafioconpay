@@ -13,7 +13,7 @@ public class MenuDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	private Double balance;
+	private Double balance = 100.00;
 	private Double extract;
 	private Double transfer;
 	private Long phonenumber;

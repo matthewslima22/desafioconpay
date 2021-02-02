@@ -12,27 +12,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.desafioconpay.conpay.dto.MenuDTO;
-import com.desafioconpay.conpay.services.MenuService;
+import com.desafioconpay.conpay.dto.ExtractDTO;
+import com.desafioconpay.conpay.services.ExtractService;
 
 @RestController
-@RequestMapping(value = "/menu")
-public class MenuController {
+@RequestMapping(value = "/extracts")
+public class ExtractController {
 	
 	@Autowired
-	private MenuService service;
+	private ExtractService service;
 	
 	@GetMapping
-	public ResponseEntity<List<MenuDTO>> findAll(){
-		List<MenuDTO> list = service.findAll();
+	public ResponseEntity<List<ExtractDTO>> findAll(){
+		List<ExtractDTO> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@PostMapping	
-	public ResponseEntity<MenuDTO> insert(@RequestBody MenuDTO dto){
+	public ResponseEntity<ExtractDTO> insert(@RequestBody ExtractDTO dto){
 		dto = service.insert(dto);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{cpf}")
-				.buildAndExpand(dto.getCpf()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(dto);
 		
 	}

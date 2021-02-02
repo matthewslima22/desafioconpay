@@ -13,18 +13,21 @@ public class RegisterDTO implements Serializable{
 	private Long cpf;
 	private String address;
 	private String password;
+	private Double balance = 100.00;
+
 	
 	public RegisterDTO() {
 		
 	}
 
-	public RegisterDTO(Long id, String name, Long cpf, String address, String password) {
+	public RegisterDTO(Long id, String name, Long cpf, String address, String password, Double balance) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.cpf = cpf;
 		this.address = address;
 		this.password = password;
+		this.balance = balance;
 	}
 	
 	public RegisterDTO(Register entity) {
@@ -34,6 +37,7 @@ public class RegisterDTO implements Serializable{
 		cpf = entity.getCpf();
 		address = entity.getAddress();
 		password = entity.getPassword();
+		balance = entity.getBalance();
 	}
 
 	public Long getId() {
@@ -75,6 +79,15 @@ public class RegisterDTO implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public Double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(Double balance) {
+		this.balance = balance;
+	}
+	
 	
 	
 }

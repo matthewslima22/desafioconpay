@@ -1,42 +1,53 @@
 package com.desafioconpay.conpay.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_register")
-public class Register implements Serializable{
+@Table(name = "tb_extract")
+public class Extract implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private Long id;
-	private String name;
 	private Long cpf;
-	private String address;
-	private String password;
-	private Double balance = 100.00;
+	private Double transfer;
+	private Double balance;
+	private Double recarga;
+	
+	@ManyToMany
+	@JoinTable(name = "tb_extract_register",
+		joinColumns = @JoinColumn(name = "extract_cpf"),
+		inverseJoinColumns =  @JoinColumn(name = "register_cpf"))
+	private Set<Register> registers = new HashSet<>();
 
 	
-	public Register() {
+	public Extract() {
 		
 	}
 
-	public Register(Long id, String name, Long cpf, String address, String password, Double balance) {
+	public Extract(Long id, Double transfer, Double balance, Long cpf, Double recarga) {
 		super();
 		this.id = id;
-		this.name = name;
 		this.cpf = cpf;
-		this.address = address;
-		this.password = password;
-		this.balance =  balance;
+		this.transfer = transfer;
+		this.balance = balance;
+		this.recarga = recarga;
 	}
+	
 
 	public Long getId() {
 		return id;
@@ -45,14 +56,7 @@ public class Register implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
+	
 
 	public Long getCpf() {
 		return cpf;
@@ -62,20 +66,12 @@ public class Register implements Serializable{
 		this.cpf = cpf;
 	}
 
-	public String getAddress() {
-		return address;
+	public Double getTransfer() {
+		return transfer;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	public void setTransfer(Double transfer) {
+		this.transfer = transfer;
 	}
 
 	public Double getBalance() {
@@ -85,6 +81,18 @@ public class Register implements Serializable{
 	public void setBalance(Double balance) {
 		this.balance = balance;
 	}
+
+	public Double getRecarga() {
+		return recarga;
+	}
+
+	public void setRecarga(Double recarga) {
+		this.recarga = recarga;
+	}
+	public Set<Register> getRegisters() {
+		return registers;
+	}
+	
 
 	@Override
 	public int hashCode() {
@@ -103,7 +111,7 @@ public class Register implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Register other = (Register) obj;
+		Extract other = (Extract) obj;
 		if (cpf == null) {
 			if (other.cpf != null)
 				return false;
@@ -117,4 +125,5 @@ public class Register implements Serializable{
 		return true;
 	}
 	
+
 }

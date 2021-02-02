@@ -7,44 +7,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.desafioconpay.conpay.dto.MenuDTO;
+import com.desafioconpay.conpay.dto.ExtractDTO;
 import com.desafioconpay.conpay.dto.RegisterDTO;
-import com.desafioconpay.conpay.entities.LoginStatus;
-import com.desafioconpay.conpay.entities.Menu;
+import com.desafioconpay.conpay.entities.Extract;
 import com.desafioconpay.conpay.entities.Register;
-import com.desafioconpay.conpay.repositories.MenuRepository;
+import com.desafioconpay.conpay.repositories.ExtractRepository;
 import com.desafioconpay.conpay.repositories.RegisterRepository;
 
 @Service
-public class MenuService {
+public class ExtractService {
 	
 	@Autowired
-	private MenuRepository repository;
+	private ExtractRepository repository;
 	
 	@Autowired
 	private RegisterRepository registerRepository;
 	
 	
 	@Transactional(readOnly = true)
-	public List<MenuDTO> findAll(){
-		List <Menu> list = repository.findMenuWithRegisters();
-		return list.stream().map(x -> new MenuDTO(x)).collect(Collectors.toList());
+	public List<ExtractDTO> findAll(){
+		List <Extract> list = repository.findExtractWithRegisters();
+		return list.stream().map(x -> new ExtractDTO(x)).collect(Collectors.toList());
 		
 		
 	}
 	
 	@Transactional
-	public MenuDTO insert(MenuDTO dto) {
-		Menu menu = new Menu(null, dto.getBalance(), dto.getExtract(), dto.getTransfer(),
-				dto.getPhonenumber(), dto.getCpf(), dto.getPassword(),  LoginStatus.SUCCESS);
+	public ExtractDTO insert(ExtractDTO dto) {
+		Extract extract = new Extract();
 		for (RegisterDTO p : dto.getRegisters()) {
 			
 			Register register = registerRepository.getOne(p.getId());
 //			RegisterDTO cpf = null;
-			menu.getRegisters().add(register);
+			extract.getRegisters().add(register);
 		}
-		menu = repository.save(menu);
-		return new MenuDTO(menu);
+		extract = repository.save(extract);
+		return new ExtractDTO(extract);
 	}
 
 }
