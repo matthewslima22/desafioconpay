@@ -13,7 +13,7 @@ public class OperationsDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	private Double balance = 100.00;
+	private Double balance;
 	private Double transfer;
 	private Long cpf;
 	private Double recarga;
@@ -27,7 +27,7 @@ public class OperationsDTO implements Serializable{
 	public OperationsDTO(Long id, Long cpf, Double balance, Double transfer, Double recarga) {
 		this.id = id;
 		this.cpf = cpf;
-		this.balance = balance;
+		this.balance = balance + 100;
 		this.transfer = transfer;
 		this.recarga = recarga;
 

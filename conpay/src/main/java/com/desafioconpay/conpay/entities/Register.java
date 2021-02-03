@@ -21,7 +21,7 @@ public class Register implements Serializable{
 	private Long cpf;
 	private String address;
 	private String password;
-	private Double balance = 100.00;
+	private Double balance;
 
 	
 	public Register() {
@@ -35,7 +35,7 @@ public class Register implements Serializable{
 		this.cpf = cpf;
 		this.address = address;
 		this.password = password;
-		this.balance =  balance;
+		this.balance =  balance + 100;
 	}
 
 	public Long getId() {

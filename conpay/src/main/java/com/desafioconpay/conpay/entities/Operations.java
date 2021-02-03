@@ -25,7 +25,7 @@ public class Operations implements Serializable{
 	private Long id;
 	private Long cpf;
 	private Double transfer;
-	private Double balance = 100.00;
+	private Double balance;
 	private Double recarga;
 	
 	@ManyToMany
@@ -44,7 +44,7 @@ public class Operations implements Serializable{
 		this.id = id;
 		this.cpf = cpf;
 		this.transfer = transfer;
-		this.balance = balance;
+		this.balance = balance + 100;
 		this.recarga = recarga;
 	}
 	

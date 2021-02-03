@@ -13,7 +13,7 @@ public class ExtractDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	private Double balance = 100.00;
+	private Double balance;
 	private Double transfer;
 	private Long cpf;
 	private Double recarga;
